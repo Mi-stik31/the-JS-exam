@@ -23,16 +23,16 @@ class WeatherData
 let weatherData = new WeatherData();
 let resultContainer = document.getElementById("container");
 
-let renderTodayWeather = (data) =>
+const renderTodayWeather = (data) =>
 {
-	let dCurrentWeather = `<div>
+	let dCurrentWeather = `<div class="mt-2">
         <div class="row">
             <div class="col"><span>Current Weather</span></div>
             <div class="col"><span id="current-day"></span></div>
-        </div>
-        <div class="row">
-            <div id="current-weather-image" class="col"></div>
-            <div id="current-weather-temp" class="col"></div>
+        </div >
+        <div class="row mt-5">
+            <div id="current-weather-image" class="col text-center"></div>
+            <div id="current-weather-temp" class="col text-center"></div>
             <div id="current-weather-sunrise" class="col"></div>
         </div>
     </div> `;
@@ -56,12 +56,15 @@ let renderTodayWeather = (data) =>
 	document.getElementById("current-weather-image").innerHTML = `<img src="./icons/${data.weather[0].icon}.png" class="img-thumbnail" alt="Иконка не найдена"></img>`;
 
 	//_____________________________________________TEXT_AFTER_ICON_______________________________________
+	document.getElementById("current-weather-image").innerHTML += `<p class="text-center">${data.weather[0].main}<p>`;
 
-	document.getElementById("current-weather-image").innerHTML + `<p>${}<p>`
 	//__________________________________________________TEMP_____________________________________________
-	document.getElementById("current-weather-temp").innerHTML = `<span>` +
+	document.getElementById("current-weather-temp").innerHTML = `<span class="fw-bold">` +
 		Math.floor(data.main.temp) +
 		`&#176;C</span>`;
+
+	//____________________________________________TEMP_FEELS_LIKE________________________________________
+	document.getElementById("current-weather-temp").innerHTML += `<p class="text-center">Real feel ${parseInt(data.main.feels_like)}<p>`;
 
 
 	//_________________________________________________SUNRISE___________________________________________
@@ -73,6 +76,13 @@ let renderTodayWeather = (data) =>
 		`<p class="text-center">Sunset: ${dateSuns.getHours()}:${dateSuns.getMinutes()} </p>` +
 		`<p class="text-center">Duration: ${duration.getHours()}:${duration.getMinutes()}</p>`;
 
+}
+
+const renderTodayHoursWeather = () =>
+{
+	let dHoursWeather = `ВСТАВИТЬ ИЗ HTML`;
+
+	resultContainer.innerHTML += dHoursWeather;
 }
 
 let bRenderTodayWeather = document.getElementById("btn-check-outlined");
